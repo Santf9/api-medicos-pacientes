@@ -1,5 +1,8 @@
 package com.medvoll.api.controller;
+import com.medvoll.api.medico.Medico;
 import com.medvoll.api.medico.MedicoDTO;
+import com.medvoll.api.service.IMedicoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,8 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/medicos")
 public class MedicoController {
 
+    @Autowired // Inyecta automáticamente la implementación de IMedicoRepository
+    private IMedicoRepository repository;
+
     @PostMapping
     public void registrarMedico(@RequestBody MedicoDTO datos) { // Aquí puedes procesar los datos del médico
-        System.out.println(datos);
+        repository.save(new Medico(datos));
     }
 }

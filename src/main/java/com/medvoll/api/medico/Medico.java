@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id") // Genera automáticamente el metodo equals y hashCode basándose en el campo id
-
 @Entity
 @Table(name = "medicos")
 public class Medico {
@@ -25,4 +24,12 @@ public class Medico {
     @Embedded
     private Direccion direccion;
 
+    public Medico(MedicoDTO datos) {
+        this.id = null; // El ID se generará automáticamente al guardar en la base de datos
+        this.nombre = datos.nombre();
+        this.email = datos.email();
+        this.documento = datos.documento();
+        this.especialidad = datos.especialidad();
+        this.direccion = new Direccion(datos.direccion());
+    }
 }
