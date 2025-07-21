@@ -1,4 +1,5 @@
 package com.medvoll.api.direccion;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,6 +14,7 @@ public class Direccion {
     private String calle;
     private String numero;
     private String barrio;
+    @Column(nullable = false) // Asegura que el campo codigoPostal no puede ser nulo en la base de datos
     private String codigoPostal;
     private String ciudad;
     private String estado;
