@@ -1,4 +1,4 @@
-package com.medvoll.api.dto;
+package com.medvoll.api.medico;
 
 public enum Especialidad {
 

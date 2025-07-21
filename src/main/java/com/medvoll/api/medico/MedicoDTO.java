@@ -1,6 +1,5 @@
-package com.medvoll.api.dto;
-
-import com.medvoll.api.direccion.Direccion;
+package com.medvoll.api.medico;
+import com.medvoll.api.direccion.DireccionDTO;
 
 public record MedicoDTO(
 
@@ -8,6 +7,6 @@ public record MedicoDTO(
         String email,
         String documento,
         Especialidad especialidad,
-        Direccion direccion
+        DireccionDTO direccion
 ) {
 }
