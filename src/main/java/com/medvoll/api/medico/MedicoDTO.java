@@ -12,6 +12,7 @@ public record MedicoDTO(
         String nombre,
         @NotBlank @Email
         String email,
+        @NotBlank String telefono,
         @NotBlank @Pattern(regexp = "\\d{7,9}")
         String documento,
         @NotNull
