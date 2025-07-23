@@ -18,6 +18,7 @@ public class Medico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Boolean activo;
     private String nombre;
     private String email;
     private String telefono;
@@ -29,6 +30,7 @@ public class Medico {
 
     public Medico(MedicoDTO datos) {
         this.id = null; // El ID se generará automáticamente al guardar en la base de datos
+        this.activo = true;
         this.nombre = datos.nombre();
         this.email = datos.email();
         this.telefono = datos.telefono();
@@ -47,5 +49,9 @@ public class Medico {
         if(datos.direccion() != null) {
             this.direccion.actualizarDireccion(datos.direccion());
         }
+    }
+
+    public void eliminar() {
+        this.activo = false; // Cambia el estado a inactivo en lugar de eliminar físicamente
     }
 }

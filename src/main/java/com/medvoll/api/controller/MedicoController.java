@@ -11,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
 @RequestMapping("/medicos")
@@ -40,5 +39,10 @@ public class MedicoController {
         // No es necesario llamar a repository.save(medico) porque getReferenceById ya está gestionando la entidad
     }
 
-
+    @Transactional
+    @DeleteMapping("/{id}")
+    public void eliminarMedico(@PathVariable Long id) {
+        var medico = repository.getReferenceById(id);
+        medico.eliminar(); // Asumiendo que tienes un metodo eliminar en la entidad Médico
+    }
 }
