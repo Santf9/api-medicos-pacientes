@@ -1,4 +1,5 @@
 package com.medvoll.api.controller;
+import com.medvoll.api.medico.ActualizarMedicoDTO;
 import com.medvoll.api.medico.Medico;
 import com.medvoll.api.medico.MedicoDTO;
 import com.medvoll.api.medico.ListaMedicoDTO;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -28,5 +30,13 @@ public class MedicoController {
     public Page<ListaMedicoDTO> listarMedicos(@PageableDefault(size = 10, sort = {"nombre"}) Pageable paginacion) {
         return repository.findAll(paginacion).map(ListaMedicoDTO::new); // Page no acepta stream pero si reconoce map
 
+    }
+
+    @Transactional // Asegura que la transacción se maneje correctamente en metodo PUT
+    @PutMapping
+    public void actualizarMedico(@RequestBody @Valid ActualizarMedicoDTO datos) {
+        var medico = repository.getReferenceById(datos.id());
+        medico.actualizarDatos(datos);
+        // No es necesario llamar a repository.save(medico) porque getReferenceById ya está gestionando la entidad
     }
 }
