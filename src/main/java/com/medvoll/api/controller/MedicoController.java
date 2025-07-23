@@ -39,4 +39,6 @@ public class MedicoController {
         medico.actualizarDatos(datos);
         // No es necesario llamar a repository.save(medico) porque getReferenceById ya está gestionando la entidad
     }
+
+
 }
