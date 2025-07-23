@@ -8,16 +8,11 @@ import jakarta.validation.constraints.Pattern;
 
 public record MedicoDTO(
 
-        @NotBlank
-        String nombre,
-        @NotBlank @Email
-        String email,
+        @NotBlank String nombre,
+        @NotBlank @Email String email,
         @NotBlank String telefono,
-        @NotBlank @Pattern(regexp = "\\d{7,9}")
-        String documento,
-        @NotNull
-        Especialidad especialidad,
-        @NotNull @Valid
-        DireccionDTO direccion
+        @NotBlank @Pattern(regexp = "\\d{7,9}") String documento,
+        @NotNull Especialidad especialidad,
+        @NotNull @Valid DireccionDTO direccion
 ) {
 }

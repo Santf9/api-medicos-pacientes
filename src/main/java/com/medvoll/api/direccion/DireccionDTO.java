@@ -5,16 +5,11 @@ import jakarta.validation.constraints.Pattern;
 
 public record DireccionDTO(
 
-        @NotBlank
-        String calle,
+        @NotBlank String calle,
         String numero,
-        @NotBlank
-        String barrio,
-        @NotBlank @Pattern(regexp = "\\d{4}")
-        String codigo_postal,
-        @NotBlank
-        String ciudad,
-        @NotBlank
-        String estado
+        @NotBlank String barrio,
+        @NotBlank @Pattern(regexp = "\\d{4}") String codigo_postal,
+        @NotBlank String ciudad,
+        @NotBlank String estado
 ) {
 }
