@@ -27,8 +27,7 @@ public class MedicoController {
     // Metodo para obtener un médico por paginación
     @GetMapping
     public Page<ListaMedicoDTO> listarMedicos(@PageableDefault(size = 10, sort = {"nombre"}) Pageable paginacion) {
-        return repository.findAll(paginacion).map(ListaMedicoDTO::new); // Page no acepta stream pero si reconoce map
-
+        return repository.findAllByActivoTrue(paginacion).map(ListaMedicoDTO::new); // Page no acepta stream pero si reconoce map
     }
 
     @Transactional // Asegura que la transacción se maneje correctamente en metodo PUT
