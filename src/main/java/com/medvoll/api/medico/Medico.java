@@ -17,7 +17,7 @@ public class Medico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(columnDefinition = "BOOLEAN")
+    @Column(columnDefinition = "TINYINT(1)")
     private Boolean activo;
     private String nombre;
     private String email;
