@@ -1,6 +1,5 @@
 package com.medvoll.api.medico;
 import com.medvoll.api.direccion.Direccion;
-import com.medvoll.api.direccion.DireccionDTO;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -18,6 +17,7 @@ public class Medico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(columnDefinition = "BOOLEAN")
     private Boolean activo;
     private String nombre;
     private String email;
