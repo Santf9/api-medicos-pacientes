@@ -9,6 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/medicos")
@@ -17,9 +18,16 @@ public class MedicoController {
     @Autowired // Inyecta automáticamente la implementación de IMedicoRepository
     private IMedicoRepository repository;
 
+    @Transactional
     @PostMapping
-    public void registrarMedico(@RequestBody @Valid MedicoDTO datos) { // Aquí puedes procesar los datos del médico
-        repository.save(new Medico(datos));
+    public ResponseEntity registrarMedico(@RequestBody @Valid MedicoDTO datos, UriComponentsBuilder uriComponentsBuilder) { // Aquí puedes procesar los datos del médico
+        var medico = new Medico(datos);
+        repository.save(medico);
+
+        // Construye la URI para el nuevo recurso
+        var uri = uriComponentsBuilder.path("/medicos/{id}").buildAndExpand(medico.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new DetallesActualizacionMedicoDTO(medico));
     }
 
     // Metodo para obtener un médico por paginación
