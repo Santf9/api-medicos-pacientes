@@ -27,6 +27,7 @@ public class MedicoController {
         // Construye la URI para el nuevo recurso
         var uri = uriComponentsBuilder.path("/medicos/{id}").buildAndExpand(medico.getId()).toUri();
 
+        // Devuelve un 201 Created con los detalles del médico registrado
         return ResponseEntity.created(uri).body(new DetallesActualizacionMedicoDTO(medico));
     }
 
@@ -55,5 +56,12 @@ public class MedicoController {
         medico.eliminar(); // Asumiendo que tienes un metodo eliminar en la entidad Médico
 
         return  ResponseEntity.noContent().build(); // Devuelve un 204 No Content
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity detallarMedico(@PathVariable Long id) {
+        var medico = repository.getReferenceById(id);
+
+        return  ResponseEntity.ok(new DetallesActualizacionMedicoDTO(medico));
     }
 }
