@@ -1,0 +1,20 @@
+package com.medvoll.api.infra.security;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity // Esta anotación habilita la configuración de seguridad e indica que esta clase realizará cambios
+public class SecurityConfiguration {
+
+    @Bean // Anotación para indicar que el metodo devuelve un bean que será administrado por Spring Security
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http.csrf(csrf -> csrf.disable()) // Deshabilita la protección CSRF (Cross-Site Request Forgery)
+                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Configura la política de sesión como sin estado
+                .build(); // Construye el filtro de seguridad
+
+    }
+}
