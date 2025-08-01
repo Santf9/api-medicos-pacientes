@@ -2,6 +2,6 @@ package com.medvoll.api.domain.usuario;
 
 public record AutenticacionDTO(
         String login,
-        String password) {
+        String contrasena) {
 
 }

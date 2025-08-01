@@ -1,5 +1,4 @@
 package com.medvoll.api.controller;
-
 import com.medvoll.api.domain.usuario.AutenticacionDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class AutenticacionController {
     @PostMapping
     public ResponseEntity autenticacionController(@RequestBody @Valid AutenticacionDTO datos) {
 
-        var token = new UsernamePasswordAuthenticationToken(datos.login(), datos.password());
+        var token = new UsernamePasswordAuthenticationToken(datos.login(), datos.contrasena());
         var autenticacion = autenticationManager.authenticate(token);
 
         return ResponseEntity.ok(autenticacion);
