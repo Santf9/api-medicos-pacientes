@@ -1,5 +1,5 @@
-package com.medvoll.api.medico;
-import com.medvoll.api.direccion.DireccionDTO;
+package com.medvoll.api.domain.medico;
+import com.medvoll.api.domain.direccion.DireccionDTO;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

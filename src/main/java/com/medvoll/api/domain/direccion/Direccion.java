@@ -1,4 +1,4 @@
-package com.medvoll.api.direccion;
+package com.medvoll.api.domain.direccion;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

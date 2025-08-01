@@ -1,5 +1,5 @@
 package com.medvoll.api.service;
-import com.medvoll.api.medico.Medico;
+import com.medvoll.api.domain.medico.Medico;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

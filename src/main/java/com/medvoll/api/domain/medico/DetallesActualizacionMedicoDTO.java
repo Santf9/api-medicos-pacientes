@@ -1,5 +1,5 @@
-package com.medvoll.api.medico;
-import com.medvoll.api.direccion.Direccion;
+package com.medvoll.api.domain.medico;
+import com.medvoll.api.domain.direccion.Direccion;
 
 public record DetallesActualizacionMedicoDTO(
 

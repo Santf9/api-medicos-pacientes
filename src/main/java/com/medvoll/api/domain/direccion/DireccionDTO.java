@@ -1,4 +1,4 @@
-package com.medvoll.api.direccion;
+package com.medvoll.api.domain.direccion;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
