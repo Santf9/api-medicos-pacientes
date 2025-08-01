@@ -11,6 +11,11 @@ public record ListaMedicoDTO(
 ) {
     // Constructor que permite crear un objeto ListaMedicoDTO a partir de un objeto Médico
     public ListaMedicoDTO(Medico medico) {
-        this(medico.getId(), medico.getNombre(), medico.getEmail(), medico.getDocumento(), medico.getEspecialidad(), medico.getActivo());
+        this(medico.getId(),
+                medico.getNombre(),
+                medico.getEmail(),
+                medico.getDocumento(),
+                medico.getEspecialidad(),
+                medico.getActivo());
     }
 }
