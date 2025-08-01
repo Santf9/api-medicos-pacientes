@@ -20,7 +20,7 @@ public class MedicoController {
 
     @Transactional
     @PostMapping
-    public ResponseEntity registrarMedico(@RequestBody @Valid MedicoDTO datos, UriComponentsBuilder uriComponentsBuilder) { // Aquí puedes procesar los datos del médico
+    public ResponseEntity registrarMedico(@RequestBody @Valid MedicoDTO datos, UriComponentsBuilder uriComponentsBuilder) {
         var medico = new Medico(datos);
         repository.save(medico);
 
