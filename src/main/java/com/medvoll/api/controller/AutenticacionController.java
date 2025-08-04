@@ -18,12 +18,12 @@ public class AutenticacionController {
     private AuthenticationManager autenticationManager; // Autenticación de Spring Security
 
     @PostMapping
-    public ResponseEntity autenticacionController(@RequestBody @Valid AutenticacionDTO datos) {
+    public ResponseEntity iniciarSesion(@RequestBody @Valid AutenticacionDTO datos) {
 
         var token = new UsernamePasswordAuthenticationToken(datos.login(), datos.contrasena());
         var autenticacion = autenticationManager.authenticate(token);
 
-        return ResponseEntity.ok(autenticacion);
+        return ResponseEntity.ok().build();
 
 
     }
