@@ -1,5 +1,7 @@
 package com.medvoll.api.controller;
 import com.medvoll.api.domain.usuario.AutenticacionDTO;
+import com.medvoll.api.domain.usuario.Usuario;
+import com.medvoll.api.infra.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class AutenticacionController {
 
     @Autowired
+    private TokenService tokenService; // Servicio para generar el token JWT
+
+    @Autowired
     private AuthenticationManager autenticationManager; // Autenticación de Spring Security
 
     @PostMapping
@@ -23,7 +28,7 @@ public class AutenticacionController {
         var token = new UsernamePasswordAuthenticationToken(datos.login(), datos.contrasena());
         var autenticacion = autenticationManager.authenticate(token);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(tokenService.generarToken((Usuario) autenticacion.getPrincipal()));
 
 
     }
