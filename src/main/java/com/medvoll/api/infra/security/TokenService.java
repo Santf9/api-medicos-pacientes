@@ -15,7 +15,7 @@ public class TokenService {
         try {
             var algoritmo = Algorithm.HMAC256("12345678");
             return JWT.create()
-                    .withIssuer("API Vollmed")
+                    .withIssuer("API Vollmed") // Sistema que emite el token
                     .withSubject(usuario.getLogin())
                     .withExpiresAt(fechaExpiracion())
                     .sign(algoritmo);
