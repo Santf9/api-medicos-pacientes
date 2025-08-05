@@ -1,6 +1,7 @@
 package com.medvoll.api.infra.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,6 +19,9 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(csrf -> csrf.disable()) // Deshabilita la protección CSRF (Cross-Site Request Forgery)
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Configura la política de sesión como sin estado
+                .authorizeHttpRequests(req -> req
+                        .requestMatchers(HttpMethod.POST,"/login").permitAll() // Permite el acceso a los endpoints de usuarios sin autenticación
+                        .anyRequest().authenticated()) // Requiere autenticación para cualquier otra solicitud
                 .build(); // Construye el filtro de seguridad
 
     }
