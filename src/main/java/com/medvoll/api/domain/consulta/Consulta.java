@@ -1,5 +1,4 @@
 package com.medvoll.api.domain.consulta;
-
 import com.medvoll.api.domain.medico.Medico;
 import com.medvoll.api.domain.paciente.Paciente;
 import jakarta.persistence.*;
@@ -7,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 
 @Getter
@@ -31,5 +29,13 @@ public class Consulta {
     private Paciente paciente;
 
     private LocalDateTime fecha;
+
+    @Column(name = "motivo_cancelamiento")
+    @Enumerated(EnumType.STRING)
+    private MotivoCancelamiento motivoCancelamiento;
+
+    public void cancelar(MotivoCancelamiento motivo) {
+        this.motivoCancelamiento = motivo;
+    }
 
 }

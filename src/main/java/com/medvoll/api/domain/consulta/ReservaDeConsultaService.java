@@ -31,7 +31,7 @@ public class ReservaDeConsultaService {
         var medico = elegirMedico(datosReserva);
         var paciente = pacienteRepository.findById(datosReserva.idPaciente()).get();
 
-        var consulta = new Consulta(null, medico, paciente, datosReserva.fecha());
+        var consulta = new Consulta(null, medico, paciente, datosReserva.fecha(), null);
         consultaRepository.save(consulta);
     }
 
@@ -47,4 +47,13 @@ public class ReservaDeConsultaService {
 
     }
 
+    public void cancelarConsulta(DatosCancelamientoConsultaDTO datosCancelacion) {
+        if (!consultaRepository.existsById(datosCancelacion.idConsulta())) {
+            throw new ValidacionException("ID de consulta no existe");
+        }
+
+        var consulta = consultaRepository.getReferenceById(datosCancelacion.idConsulta());
+        consulta.cancelar(datosCancelacion.motivo());
+
+    }
 }
