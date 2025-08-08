@@ -3,7 +3,7 @@ import com.medvoll.api.domain.ValidacionException;
 import com.medvoll.api.domain.consulta.DatosReservaConsultaDTO;
 import com.medvoll.api.domain.medico.IMedicoRepository;
 
-public class ValidarMedicoActivo {
+public class ValidadorMedicoActivo {
 
     private IMedicoRepository repository;
 

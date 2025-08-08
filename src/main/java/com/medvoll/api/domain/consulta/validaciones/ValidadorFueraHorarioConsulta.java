@@ -3,7 +3,7 @@ import com.medvoll.api.domain.ValidacionException;
 import com.medvoll.api.domain.consulta.DatosReservaConsultaDTO;
 import java.time.DayOfWeek;
 
-public class ValidacionFueraHorarioConsulta {
+public class ValidadorFueraHorarioConsulta {
 
     public void validar(DatosReservaConsultaDTO datos) {
         var fechaConsulta = datos.fecha();

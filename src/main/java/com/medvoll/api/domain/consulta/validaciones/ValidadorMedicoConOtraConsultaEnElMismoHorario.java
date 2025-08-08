@@ -3,7 +3,7 @@ import com.medvoll.api.domain.ValidacionException;
 import com.medvoll.api.domain.consulta.DatosReservaConsultaDTO;
 import com.medvoll.api.domain.consulta.IConsultaRepository;
 
-public class ValidarMedicoConOtraConsultaEnElMismoHorario {
+public class ValidadorMedicoConOtraConsultaEnElMismoHorario {
 
     private IConsultaRepository repository;
 

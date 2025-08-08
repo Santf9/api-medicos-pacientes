@@ -4,7 +4,7 @@ import com.medvoll.api.domain.consulta.DatosReservaConsultaDTO;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class ValidacionConsultaConAnticipacion {
+public class ValidadorConsultaConAnticipacion {
 
     public void validar(DatosReservaConsultaDTO datos) {
         var fechaConsulta = datos.fecha();
