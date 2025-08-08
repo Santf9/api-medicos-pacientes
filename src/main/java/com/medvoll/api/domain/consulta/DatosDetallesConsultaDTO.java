@@ -9,4 +9,9 @@ public record DatosDetallesConsultaDTO(
     Long idPaciente,
     LocalDateTime fecha
 ) {
+
+    public DatosDetallesConsultaDTO(Consulta consulta) {
+        this(consulta.getId(), consulta.getMedico().getId(), consulta.getPaciente().getId(), consulta.getFecha());
+
+    }
 }
