@@ -35,6 +35,10 @@ public class ReservaDeConsultaService {
         consultaRepository.save(consulta);
     }
 
+    // Validaciones
+
+
+
     private Medico elegirMedico(DatosReservaConsultaDTO datosReserva) {
         if (datosReserva.idMedico() != null) {
             return medicoRepository.getReferenceById(datosReserva.idMedico());
