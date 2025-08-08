@@ -34,6 +34,11 @@ public class ReservaDeConsultaService {
         }
 
         var medico = elegirMedico(datosReserva);
+
+        if (medico == null) {
+            throw new ValidacionException("No existe un médico disponible en ese horario");
+        }
+
         var paciente = pacienteRepository.findById(datosReserva.idPaciente()).get();
 
         var consulta = new Consulta(null, medico, paciente, datosReserva.fecha(), null);

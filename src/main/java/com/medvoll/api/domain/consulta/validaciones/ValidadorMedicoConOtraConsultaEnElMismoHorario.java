@@ -15,7 +15,7 @@ public class ValidadorMedicoConOtraConsultaEnElMismoHorario implements Validador
         var medicoTieneOtraConsultaEnElMismoHorario = repository.existsByMedicoIdAndFecha(datos.idMedico(), datos.fecha());
 
         if (medicoTieneOtraConsultaEnElMismoHorario) {
-            throw new ValidacionException("El médico ya tiene una consulta reservada para el mismo horario");
+            throw new ValidacionException("El médico ya tiene una consulta reservada para esa fecha y hora");
         }
     }
 }

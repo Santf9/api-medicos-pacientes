@@ -1,4 +1,5 @@
 package com.medvoll.api.infra.exceptions;
+import com.medvoll.api.domain.ValidacionException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -18,6 +19,11 @@ public class GestorDeErrores {
     public ResponseEntity gestionarError400(MethodArgumentNotValidException ex) {
         var errores = ex.getFieldErrors();
         return ResponseEntity.badRequest().body(errores.stream().map(datosErrorValidacion::new).toList());
+    }
+
+    @ExceptionHandler(ValidacionException.class)
+    public ResponseEntity gestionarErrorDeValidacion(ValidacionException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 
     // DTO para representar los errores de validación
