@@ -4,5 +4,5 @@ public enum MotivoCancelamiento {
 
     PACIENTE_DESISITIO,
     MEDICO_CANCELO,
-    OTROS
+    OTROS;
 }
