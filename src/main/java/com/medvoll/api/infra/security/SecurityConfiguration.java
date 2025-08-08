@@ -27,7 +27,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(req -> req
                         .requestMatchers(HttpMethod.POST,"/login").permitAll() // Permite el acceso a los endpoints de usuarios sin autenticación
                         .anyRequest().authenticated()) // Requiere autenticación para cualquier otra solicitud
-                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class) // Añade el filtro de seguridad personalizado antes de los filtros de autenticación)
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class) // Añade el filtro de seguridad personalizado antes de los filtros de autenticación
                 .build(); // Construye el filtro de seguridad
 
     }
