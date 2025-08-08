@@ -11,7 +11,7 @@ public interface IMedicoRepository extends JpaRepository<Medico, Long> {
 
     @Query("""
             SELECT m FROM Medico m
-            WHERE m.activo = 1
+            WHERE m.activo = TRUE
             AND
             m.especialidad = :especialidad
             AND m.id NOT IN (

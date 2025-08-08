@@ -15,7 +15,7 @@ public class ValidadorPacienteSinOtraConsultaElMismoDia implements ValidadorDeCo
     public void validar(DatosReservaConsultaDTO datos) {
         var primerHorario = datos.fecha().withHour(7);
         var ultimoHorario = datos.fecha().withHour(18);
-        var tieneOtraConsulta = repository.existsByPacienteIdAndFecha(datos.idPaciente(), primerHorario, ultimoHorario);
+        var tieneOtraConsulta = repository.existsByPacienteIdAndFechaBetween(datos.idPaciente(), primerHorario, ultimoHorario);
 
         if (tieneOtraConsulta) {
             throw new ValidacionException("El paciente ya tiene una consulta reservada para el mismo día");
