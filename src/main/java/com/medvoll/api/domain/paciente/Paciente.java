@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter // Genera automáticamente los métodos getter para los campos de la clase
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id") // Genera automáticamente el método equals y hashCode basándose en el campo id
+@EqualsAndHashCode(of = "id") // Genera automáticamente el metodo equals y hashCode basándose en el campo id
 @Entity(name = "Paciente")
 @Table(name = "pacientes")
 public class Paciente {
