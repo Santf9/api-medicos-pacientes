@@ -2,7 +2,6 @@ package com.medvoll.api.domain.consulta.validaciones;
 import com.medvoll.api.domain.ValidacionException;
 import com.medvoll.api.domain.consulta.DatosReservaConsultaDTO;
 import org.springframework.stereotype.Component;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
 

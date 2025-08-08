@@ -1,10 +1,12 @@
 package com.medvoll.api.domain.consulta;
 import com.medvoll.api.domain.ValidacionException;
+import com.medvoll.api.domain.consulta.validaciones.ValidadorDeConsultas;
 import com.medvoll.api.domain.medico.IMedicoRepository;
 import com.medvoll.api.domain.medico.Medico;
 import com.medvoll.api.domain.paciente.IPacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class ReservaDeConsultaService {
@@ -17,6 +19,9 @@ public class ReservaDeConsultaService {
 
     @Autowired
     private IPacienteRepository pacienteRepository;
+
+    @Autowired
+    private List<ValidadorDeConsultas> validadores;
 
     public void reservarConsulta(DatosReservaConsultaDTO datosReserva) {
 
@@ -33,11 +38,10 @@ public class ReservaDeConsultaService {
 
         var consulta = new Consulta(null, medico, paciente, datosReserva.fecha(), null);
         consultaRepository.save(consulta);
+
+        // Validaciones
+        validadores.forEach(v -> v.validar(datosReserva));
     }
-
-    // Validaciones
-
-
 
     private Medico elegirMedico(DatosReservaConsultaDTO datosReserva) {
         if (datosReserva.idMedico() != null) {
