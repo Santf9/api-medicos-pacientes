@@ -29,8 +29,9 @@ class IMedicoRepositoryTest {
     private EntityManager em;
 
     @Test
-    @DisplayName("Deberia devolver null cuando el medico buscado existe pero no esta disponible en esa fecha")
+    @DisplayName("Debería devolver null cuando el medico buscado existe pero no esta disponible en esa fecha")
     void elegirMedicoAleatorioDisponibleFechaEscenario1() {
+        // Given o Arrange
         var lunesSiguienteALas10 = LocalDateTime.now()
                 .with(TemporalAdjusters.next(DayOfWeek.MONDAY))
                 .withHour(10)
@@ -40,10 +41,27 @@ class IMedicoRepositoryTest {
         var medico = registrarMedico("medico1", "medico@gmail.com", "12345678", Especialidad.CARDIOLOGIA);
         var paciente = registrarPaciente("paciente1", "paciente@gmail.com", "87654321");
         registrarConsulta(medico, paciente, lunesSiguienteALas10);
-
-
+        // When o Act
         var medicoLibre = medicoRepository.elegirMedicoAleatorioDisponibleFecha(Especialidad.CARDIOLOGIA, lunesSiguienteALas10);
+        // Then o Assert
         assertThat(medicoLibre).isNull();
+    }
+
+    @Test
+    @DisplayName("Debería devolver medico cuando el medico buscado esta disponible en esa fecha")
+    void elegirMedicoAleatorioDisponibleFechaEscenario2() {
+        // Given o Arrange
+        var lunesSiguienteALas10 = LocalDateTime.now()
+                .with(TemporalAdjusters.next(DayOfWeek.MONDAY))
+                .withHour(10)
+                .withMinute(0)
+                .withSecond(0);
+
+        var medico = registrarMedico("medico1", "medico@gmail.com", "12345678", Especialidad.CARDIOLOGIA);
+        // When o Act
+        var medicoLibre = medicoRepository.elegirMedicoAleatorioDisponibleFecha(Especialidad.CARDIOLOGIA, lunesSiguienteALas10);
+        // Then o Assert
+        assertThat(medicoLibre).isEqualTo(medico);
     }
 
     private void registrarConsulta(Medico medico, Paciente paciente, LocalDateTime fecha) {
