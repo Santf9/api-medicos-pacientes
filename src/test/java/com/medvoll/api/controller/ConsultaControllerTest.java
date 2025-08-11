@@ -1,24 +1,44 @@
 package com.medvoll.api.controller;
 
+import com.medvoll.api.domain.consulta.DatosDetallesConsultaDTO;
+import com.medvoll.api.domain.consulta.DatosReservaConsultaDTO;
+import com.medvoll.api.domain.consulta.ReservaDeConsultaService;
+import com.medvoll.api.domain.medico.Especialidad;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.json.JacksonTester;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @SpringBootTest
 @AutoConfigureMockMvc // Configura MockMvc para pruebas de controladores
+@AutoConfigureJsonTesters // Configura JacksonTester para pruebas de JSON
 class ConsultaControllerTest {
 
     @Autowired
     private MockMvc mvc;
+
+    @Autowired
+    private JacksonTester<DatosReservaConsultaDTO> datosReservaConsultaJson;
+
+    @Autowired
+    private JacksonTester<DatosDetallesConsultaDTO> datosDetalleConsultaJson;
+
+    @MockBean // Utiliza MockBean para simular el servicio de reserva de consultas (Aísla)
+    private ReservaDeConsultaService reservaDeConsultaService;
 
     @Test
     @DisplayName("Debería devolver código HTTP 400 cuando la request no contiene datos")
@@ -28,5 +48,28 @@ class ConsultaControllerTest {
                 .andReturn().getResponse();
 
         assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+    }
+
+    @Test
+    @DisplayName("Debería devolver HTTP 200 cuando la request reciba un json válido")
+    @WithMockUser // Simula un usuario autenticado para las pruebas
+    void agendarConsulta_escenario2() throws Exception {
+
+        var fecha = LocalDateTime.now().plusHours(1);
+        var especialidad = Especialidad.CARDIOLOGIA;
+        var datosDetalle = new DatosDetallesConsultaDTO(null, 2L, 5L, fecha);
+        // Simula el comportamiento del servicio de reserva de consultas
+        when(reservaDeConsultaService.reservarConsulta(any())).thenReturn(datosDetalle);
+
+        var response = mvc.perform(post("/consultas")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(datosReservaConsultaJson.write(
+                        new DatosReservaConsultaDTO(2L,5L, fecha, especialidad)).getJson()))
+                .andReturn().getResponse();
+
+        var jsonEsperado = datosDetalleConsultaJson.write(datosDetalle).getJson();
+
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+        assertThat(response.getContentAsString()).isEqualTo(jsonEsperado);
     }
 }
