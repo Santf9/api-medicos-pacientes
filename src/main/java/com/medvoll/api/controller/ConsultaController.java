@@ -21,6 +21,7 @@ public class ConsultaController {
     @Transactional
     @PostMapping
     public ResponseEntity agendarConsulta(@RequestBody @Valid DatosReservaConsultaDTO datos) {
+
         var detallesConsulta = reserva.reservarConsulta(datos);
 
         return ResponseEntity.ok(detallesConsulta);

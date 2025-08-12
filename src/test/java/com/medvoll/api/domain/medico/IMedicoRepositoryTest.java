@@ -26,7 +26,7 @@ class IMedicoRepositoryTest {
     private IMedicoRepository medicoRepository;
 
     @Autowired
-    private EntityManager em;
+    private EntityManager em; // Para interactuar directamente con la base de datos en las pruebas
 
     @Test
     @DisplayName("Debería devolver null cuando el medico buscado existe pero no esta disponible en esa fecha")
